@@ -27,9 +27,6 @@ public class AssertScriptTest {
     }
 
     void makeClickAction(WebDriver driver, WebElement target) throws InterruptedException {
-        if (target == null) {
-            throw new IllegalArgumentException("target element is null");
-        }
         Actions confirm = new Actions(driver);
         confirm.moveToElement(target).click().build().perform();
         Thread.sleep(4000);
@@ -60,12 +57,10 @@ public class AssertScriptTest {
             assertNotNull(actual, "Title should not be null");
             assertTrue(actual.contains(EXPECTED_LAST), "Title does not contain the expected text");
 
-        } catch (IllegalArgumentException e) {
-            fail(e.getClass().getSimpleName() + " -> " + e.getMessage());
         } catch (InterruptedException e) {
             fail(e.getClass().getSimpleName());
         } catch (Exception e) {
-            fail("Other exception happens -> " + e.getClass().getSimpleName());
+            fail("Exception happens -> " + e.getClass().getSimpleName() + "\n->" + e.getMessage() + "\n");
         }
     }
 }
